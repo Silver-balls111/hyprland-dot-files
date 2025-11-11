@@ -1,0 +1,82 @@
+@import "colors.css";
+
+* {
+    border: none;
+    border-radius: 10;
+    font-family: "JetBrains Mono Nerd Font Propo", "Rubik";
+    font-size: 14.5px;
+
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    margin: 0 2px;
+    transition: all 200ms ease-in-out;
+    background: transparent;
+    color: #e8e8ed;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.active {
+    min-width: 50px;
+    background: @secondary;
+    font-weight: 500;
+    color: #121212;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+  color: #121212;
+  background-color: @secondary;
+}
+
+#workspaces button.urgent {
+  background-color: #f38ba8;
+}
+
+#clock {
+    font-weight: 700;
+    background-color: @secondary;
+    color: #121212;
+    padding: 0 5px;
+    margin: 0 3px;
+}
+
+#tray,
+#battery,
+#wireplumber,
+#bluetooth,
+#network {
+    padding: 0 5px;
+    margin: 0 3px;
+    background-color: @secondary;
+    color: #121212;
+}
+
+#battery.warning {
+  background-color: #ff9100;
+  color: #e8e8ed;
+}
+
+#battery.critical,
+#battery.urgent {
+    background-color: #ff0000;
+    color: #e8e8ed;
+}

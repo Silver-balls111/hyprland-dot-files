@@ -1,0 +1,20 @@
+yay -S  hypridle hyprlock hyprshot waybar
+
+pacman playerctl nwg-look brightnessctl tilix thunar mpvc yt-dlp "tty-jetbrainsmono nerd" "rubiks" matugen swww
+
+#For fonts:
+    rubki regular 12
+    font hinting: slight
+    font antialiasing: rgba
+
+#Create symbolic links for hypridle and lock to work
+ex: ln -s ~/.config/hypr/hypr-eco/hyprlock.conf ~/.config/hypr/hyprlock.conf
+
+#extra folder to copy from .config
+waybar
+wlogout
+rofi
+
+#to run vmware:
+sudo nano /usr/share/applications/vmware-workstation.desktop
+Exec = Exec=env GDK_BACKEND=x11 /usr/bin/vmware %U

@@ -1,0 +1,115 @@
+{
+    "layer": "top",
+    "margin-top": 2,
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "wireplumber","wireplumber#source", "network", "bluetooth", "battery"],
+    "sway/window": {
+        "max-length": 50
+    },
+
+    "battery": {
+        "interval": 15,
+        "states": {
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": {
+            "charging":
+            ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉",
+             "󰢞", "󰂊", "󰂋", "󰂅"],
+            "default":
+            ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾",
+             "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        },
+        "tooltip": true,
+        "tooltip-format": "{timeTo}"
+    },
+
+    "clock": {
+        "tooltip-format": "{calendar}",
+        "format-alt": "  {:%a, %d %b %Y}",
+        "format": "  {:%I:%M %p}"
+    },
+
+    "wireplumber": {
+        "node-type": "Audio/Sink",
+        "format": "{icon} {volume}%",
+        "format-icons": ["", ""],
+        "format-source": "",
+        "format-muted": "󰖁",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "reverse-scrolling": true,
+        "max-volume": 150,
+        "scroll-step": 1
+    },
+
+    "wireplumber#source": {
+        "node-type": "Audio/Source",
+        "format": "󰍬",
+        "format-muted": "󰍭",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "reverse-scrolling": true,
+        "scroll-step": 2
+    },
+
+    // "jack": {
+    // "format": "DSP {}%",
+    // "format-xrun": "{xruns} xruns",
+    // "format-disconnected": "DSP off",
+    // "realtime": true
+    // },
+
+    "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "󰖪", //An empty format will hide the module.
+    //"tooltip-format-wifi": "{ifname}: {ipaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "font-size": 15,
+    "on-click-right": "kitty nmtui"
+   
+    },
+
+    "bluetooth": {
+	"format": "",
+    "format-disabled": "󰂲",
+	"format-connected": " {device_alias}",
+	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    },
+
+    "hyprland/workspaces": {
+	"format": "{name}",
+    "persistent-workspaces": {
+     "*": 5, // 5 workspaces by default on every monitor
+     "HDMI-A-1": 3 // but only three on HDMI-A-1
+    }
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+
+    "tray": {
+        "spacing": 10
+    }
+}
