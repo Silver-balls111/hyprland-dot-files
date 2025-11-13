@@ -1,13 +1,26 @@
 {
     "layer": "top",
     "margin-top": 2,
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "wireplumber","wireplumber#source", "network", "bluetooth", "battery"],
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock",
+        "custom/notification"
+    ],
+    "modules-right": [
+        "tray",
+        "power-profiles-daemon",
+        "wireplumber",
+        "wireplumber#source",
+        "network",
+        "bluetooth",
+        "battery",
+        "custom/power"
+    ],
     "sway/window": {
         "max-length": 50
     },
-
     "battery": {
         "interval": 15,
         "states": {
@@ -16,27 +29,66 @@
         },
         "format": "{capacity}% {icon}",
         "format-icons": {
-            "charging":
-            ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉",
-             "󰢞", "󰂊", "󰂋", "󰂅"],
-            "default":
-            ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾",
-             "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+            "charging": [
+                "󰢜",
+                "󰂆",
+                "󰂇",
+                "󰂈",
+                "󰢝",
+                "󰂉",
+                "󰢞",
+                "󰂊",
+                "󰂋",
+                "󰂅"
+            ],
+            "default": [
+                "󰂎",
+                "󰁺",
+                "󰁻",
+                "󰁼",
+                "󰁽",
+                "󰁾",
+                "󰁿",
+                "󰂀",
+                "󰂁",
+                "󰂂",
+                "󰁹"
+            ]
         },
         "tooltip": true,
         "tooltip-format": "{timeTo}"
     },
-
     "clock": {
-        "tooltip-format": "{calendar}",
+        //"tooltip-format": "{calendar}",
         "format-alt": "  {:%a, %d %b %Y}",
-        "format": "  {:%I:%M %p}"
+        "format": "  {:%I:%M %p}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "months",
+            //"mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        },
     },
-
     "wireplumber": {
         "node-type": "Audio/Sink",
         "format": "{icon} {volume}%",
-        "format-icons": ["", ""],
+        "format-icons": [
+            "",
+            ""
+        ],
         "format-source": "",
         "format-muted": "󰖁",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -44,7 +96,6 @@
         "max-volume": 150,
         "scroll-step": 1
     },
-
     "wireplumber#source": {
         "node-type": "Audio/Source",
         "format": "󰍬",
@@ -53,49 +104,55 @@
         "reverse-scrolling": true,
         "scroll-step": 2
     },
-
     // "jack": {
     // "format": "DSP {}%",
     // "format-xrun": "{xruns} xruns",
     // "format-disconnected": "DSP off",
     // "realtime": true
     // },
-
     "network": {
-    "interface": "wlan0",
-    "format": "{ifname}",
-    "format-wifi": "",
-    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-    "format-disconnected": "󰖪", //An empty format will hide the module.
-    //"tooltip-format-wifi": "{ifname}: {ipaddr}",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-    "tooltip-format-ethernet": "{ifname} ",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50,
-    "font-size": 15,
-    "on-click-right": "kitty nmtui"
-   
+        "interface": "wlan0",
+        "format": "{ifname}",
+        "format-wifi": "",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+        "format-disconnected": "󰖪", //An empty format will hide the module.
+        //"tooltip-format-wifi": "{ifname}: {ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "font-size": 15,
+        "on-click-right": "kitty nmtui"
     },
 
     "bluetooth": {
-	"format": "",
-    "format-disabled": "󰂲",
-	"format-connected": " {device_alias}",
-	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
-	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+        "format": "",
+        "format-disabled": "󰂲",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} 󰂄{device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t 󰂄{device_battery_percentage}%",
+        "on-click": "bash -c 'if bluetoothctl show | grep -q \"Powered: yes\"; then bluetoothctl power off && notify-send \" Bluetooth Off\"; else rfkill unblock bluetooth && bluetoothctl power on && notify-send \" Bluetooth On\"; fi; pkill -RTMIN+8 waybar'",
+        "signal": 8,
+        "on-click-right": "blueman-manager",
     },
 
     "hyprland/workspaces": {
-	"format": "{name}",
-    "persistent-workspaces": {
-     "*": 5, // 5 workspaces by default on every monitor
-     "HDMI-A-1": 3 // but only three on HDMI-A-1
-    }
+        "format": "{name}",
+        "persistent-workspaces": {
+            "*": 5, // 5 workspaces by default on every monitor
+            "HDMI-A-1": 3 // but only three on HDMI-A-1
+        }
     },
+
+    "custom/power": {
+        "format": "⏻ ",
+		"on-click": "~/.config/wlogout/wlogout-auto.sh",
+        "tooltip": false,
+	},
 
     "power-profiles-daemon": {
         "format": "{icon}",
@@ -108,7 +165,26 @@
             "power-saver": ""
         }
     },
-
+    "custom/notification": {
+        "tooltip": true,
+        "format": "<span size='16pt'>{icon}</span>",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂜",
+            "dnd-notification": "󰂠",
+            "dnd-none": "󰪓",
+            "inhibited-notification": "󰂛",
+            "inhibited-none": "󰪑",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
     "tray": {
         "spacing": 10
     }

@@ -2,7 +2,7 @@
 
 * {
     border: none;
-    border-radius: 10;
+    border-radius: 20;
     font-family: "JetBrains Mono Nerd Font Propo", "Rubik";
     font-size: 14.5px;
 
@@ -15,12 +15,26 @@ window#waybar {
     background: transparent;
 }
 
+/*-----module groups----*/
+.modules-right {
+	background-color: @on_surface;
+    margin: 2px 10px 0 0;
+}
+.modules-center {
+	background-color: @on_surface;
+    margin: 2px 0 0 0;
+}
+.modules-left {
+    margin: 2px 0 0 5px;
+	background-color: @on_surface;
+}
+
 tooltip {
-  background: rgba(43, 48, 59, 0.5);
+  background: @secondary;
   border: 1px solid rgba(100, 114, 125, 0.5);
 }
 tooltip label {
-  color: white;
+  color: #121212;
 }
 
 #workspaces button {
@@ -28,7 +42,7 @@ tooltip label {
     margin: 0 2px;
     transition: all 200ms ease-in-out;
     background: transparent;
-    color: #e8e8ed;
+    color: #121212;
     font-weight: 500;
     border-bottom: 2px solid transparent;
 }
@@ -51,9 +65,10 @@ tooltip label {
   background-color: #f38ba8;
 }
 
+#custom-notification,
 #clock {
     font-weight: 700;
-    background-color: @secondary;
+    /* background-color: @secondary; */
     color: #121212;
     padding: 0 5px;
     margin: 0 3px;
@@ -63,10 +78,11 @@ tooltip label {
 #battery,
 #wireplumber,
 #bluetooth,
+#custom-power,
 #network {
     padding: 0 5px;
     margin: 0 3px;
-    background-color: @secondary;
+    /* background-color: @secondary; */
     color: #121212;
 }
 
@@ -80,3 +96,6 @@ tooltip label {
     background-color: #ff0000;
     color: #e8e8ed;
 }
+
+  
+

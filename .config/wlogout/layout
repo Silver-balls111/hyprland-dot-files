@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "loginctl lock-session",
+    "action" : "~/.config/hypr/hyprlock/hyprlock-auto.sh ",
     "text" : "Lock",
     "keybind" : "l"
 }
@@ -24,7 +24,7 @@
 }
 {
     "label" : "suspend",
-    "action" : "systemctl suspend",
+    "action" : "loginctl lock-session && systemctl suspend",
     "text" : "Suspend",
     "keybind" : "u"
 }
