@@ -27,9 +27,8 @@ window {
     cursor:                      "default";
     spacing:                     0em;
     padding:                     0em;
-    /*border-color:                @outline;*/
+    border-color:                @outline;
     background-color:            transparent;
-    border-radius:               0.5em; 
 }
 
 mainbox {
@@ -39,7 +38,7 @@ mainbox {
     orientation:                 horizontal;
     children:                    [ "dummywall" , "listbox" ];
     background-color:            transparent;
-    background-image:            url("~/wallpaper-cached/rofi/wall.thmb", height);
+    background-image:            url("~/.cache/rofi/wall.thmb", height);
 }
 
 dummywall {
@@ -60,7 +59,7 @@ mode-switcher{
     padding:                     9.2em 0.5em 9.2em 0.5em;
     spacing:                     1.2em;
     background-color:            transparent;
-    background-image:            url("~/wallpaper-cached/rofi/wall.blur", height);
+    background-image:            url("~/.cache/rofi/wall.blur", height);
 }
 
 button {
@@ -100,7 +99,7 @@ listview {
     fixed-columns:               true;
     cursor:                      "default";
     background-color:            transparent;
-    text-color:                  @shadow;
+    text-color:                  @foreground;
     border:                      0px;
 }
 
@@ -111,7 +110,7 @@ inputbar {
     border:                      2px solid;
     border-color:                @outline;
     background-color:            transparent;
-    text-color:                  @shadow;
+    text-color:                  @text;
     spacing:                     0px;
     margin:                      1.5em 0em 0em 0em;
     padding:                     1em 0em;
@@ -145,27 +144,8 @@ element {
     text-color:                  @on-primary;
 }
 
-element-text {
-    background-color:            transparent;
-    text-color:                  inherit;
-    cursor:                      inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-}
-
-element normal.normal {
-    background-color:            transparent;
-    text-color:                  #121212;
-}
-
-element alternate.normal {
-    background-color:            transparent;
-    text-color:                  #121212;
-}
-
 element selected.normal {
     background-color:            @on-secondary-container;
-     // background-color:             transparent;
     text-color:                  @on-secondary;
 }
 

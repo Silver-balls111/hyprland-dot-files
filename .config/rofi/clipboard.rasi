@@ -1,0 +1,118 @@
+/* config - Launcher */
+
+configuration {
+    modi:                       "drun";
+    font:                       "JetBrains Mono Nerd Font 10";
+    show-icons:                 true;
+  	drun-display-format:        "{name}";
+    hover-select:               true;
+}
+
+/* config and colors ---- */
+@import "colors.rasi"
+
+/* ---- Window ---- */
+window {
+    location:                   center;
+    anchor:                     center;
+    border:                     1px;
+    border-radius:              30px;
+    background-color:           @on-surface;
+    width:                      30%;
+}
+
+/* Main Box ---------------------------------------- */
+mainbox {
+    orientation:                horizontal;
+    children:                   ["listbox"];
+    background-color:           transparent;
+
+    spacing:                    24px;
+}
+
+/* Listbox ------------------------------------------ */
+listbox {
+    spacing:                     20px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/* Listview ---------------------------------------- */
+listview {
+    columns:                     1;
+    lines:                       6;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     16px;
+    background-color:            transparent;
+}
+
+/* Inputbar ---------------------------------------------- */
+inputbar {
+    children:                    [ "textbox-icon", "entry" ];
+
+    border-radius:               12px;
+    background-color:            transparent;
+    text-color:                  @shadow;
+
+    spacing:                     0px;
+    margin:                      0.5em 0em 0em 0em;
+    padding:                     0em 1em;
+}
+
+textbox-icon {
+    expand:                      false;
+    background-color:            transparent;
+    text-color:                  inherit;
+    str: "  ";
+}
+
+/* Entry ----------------------------------------------- */
+entry {
+    cursor:                     text;
+    expand:                     false;
+    placeholder-color:          inherit;
+    placeholder:                "Search Cipboard history";
+
+    background-color:           transparent;
+    text-color:                 inherit;
+}
+
+/* ---- Elements ---- */
+element {
+    cursor:                     pointer;
+    background-color:           transparent;
+    border-radius:              10px;
+    padding:                    12px;
+}
+
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  #121212;
+}
+
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  #121212;
+}
+
+element selected.normal {
+    background-color:            @on-secondary-container;
+     // background-color:             transparent;
+    text-color:                  @on-secondary;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}

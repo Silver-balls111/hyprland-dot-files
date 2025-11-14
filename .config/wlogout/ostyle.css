@@ -1,0 +1,103 @@
+#!/bin/bash
+
+# Cache directory for blurred wallpapers
+CACHE_DIR="$HOME/.cache/wlogout_blurred"
+mkdir -p "$CACHE_DIR"
+
+# Get current wallpaper path from swww
+WALLPAPER=$(swww query | grep -oP '(?<=image: ).*')
+
+if [ -z "$WALLPAPER" ]; then
+    echo "Error: Could not get wallpaper from swww"
+    exit 1
+fi
+
+# Generate unique filename based on wallpaper path hash
+WALLPAPER_HASH=$(echo -n "$WALLPAPER" | md5sum | cut -d' ' -f1)
+BLURRED_CACHE="$CACHE_DIR/${WALLPAPER_HASH}.png"
+
+# Check if blurred version already exists in cache
+if [ ! -f "$BLURRED_CACHE" ]; then
+    echo "Creating blurred cache for: $WALLPAPER"
+    # Blur the wallpaper with more dimming
+    magick "$WALLPAPER" -blur 0x8 -brightness-contrast -35 "$BLURRED_CACHE" #Increase contrast for dimmer background
+else
+    echo "Using cached blurred wallpaper: $BLURRED_CACHE"
+fi
+
+# Generate CSS with enhanced focus styles
+cat > ~/.cache/wlogout_dynamic.css << EOF
+/* Cached blurred wallpaper background with dimming */
+window {
+    background-image: url("file://${BLURRED_CACHE}");
+    background-size: cover;
+    background-position: center;
+    font-family: Fira Code Medium;
+    font-size: 16pt;
+    color: #ffffff;
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    transition: all 0.3s ease-in;
+    box-shadow: 0 0 10px 2px transparent;
+    border-radius: 36px;
+    margin: 10px;
+    outline: none;
+}
+
+/* Enhanced focus state for keyboard navigation */
+button:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    background-size: 30%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.3);
+    outline: none;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    background-size: 30%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.3);
+    outline: none;
+}
+
+#lock {
+    background-image: url("/home/anuj/.config/wlogout/icons/lock_white.png");
+}
+
+#logout {
+    background-image: url("/home/anuj/.config/wlogout/icons/logout_white.png");
+}
+
+#suspend {
+    background-image: url("/home/anuj/.config/wlogout/icons/suspend_white.png");
+}
+
+#hibernate {
+    background-image: url("/home/anuj/.config/wlogout/icons/hibernate_white.png");
+}
+
+#reboot {
+    background-image: url("/home/anuj/.config/wlogout/icons/reboot_white.png");
+}
+
+#shutdown {
+    background-image: url("/home/anuj/.config/wlogout/icons/shutdown_white.png");
+}
+
+EOF
+
+# Clean cache older than 7 days (unused wallpapers)
+find "$CACHE_DIR" -type f -mtime +7 -delete
+
+# Keep only 10 most recent cached blurs
+cd "$CACHE_DIR" && ls -t | tail -n +11 | xargs -r rm --
+
+# Launch wlogout
+wlogout -l ~/.config/wlogout/layout --css ~/.cache/wlogout_dynamic.css

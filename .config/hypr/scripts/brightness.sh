@@ -49,14 +49,17 @@ case "$1" in
             NEW_BRIGHTNESS=$((CURRENT + 5))
             if [ "$NEW_BRIGHTNESS" -gt "$MAX_BRIGHTNESS_PERCENT" ]; then
                 brightnessctl set "${MAX_BRIGHTNESS_PERCENT}%"
+                #hyprctl hyprsunset gamma +10
             else
                 brightnessctl set 5%+
+                #hyprctl hyprsunset gamma +10
             fi
             BRIGHTNESS=$(get_brightness)
         fi
         ;;
     --dec|--decrease)
         brightnessctl set 5%-
+        #hyprctl hyprsunset gamma -10
         BRIGHTNESS=$(get_brightness)
         ;;
     *)
