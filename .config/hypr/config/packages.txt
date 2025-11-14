@@ -14,9 +14,12 @@ ex: ln -s ~/.config/hypr/hypr-eco/hyprlock.conf ~/.config/hypr/hyprlock.conf
 waybar
 wlogout
 rofi
+swaync
 
 #to run vmware:
 sudo nano /usr/share/applications/vmware-workstation.desktop
 Exec = Exec=env GDK_BACKEND=x11 /usr/bin/vmware %U
 
 #configure hyprland plugins 
+hyprexpo
+huprsunset
