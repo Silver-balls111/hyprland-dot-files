@@ -1,6 +1,7 @@
-yay -S  hypridle hyprlock hyprshot waybar exa downgrade
+yay -S  hypridle hyprlock hyprshot waybar exa downgrade 
 
 pacman playerctl nwg-look brightnessctl tilix thunar mpvc yt-dlp "tty-jetbrainsmono nerd" "rubiks" matugen swww cliphist wl-clip-persist hyprsunset
+imagemagick rofi swaync waybar wlogout blueman 
 
 #For fonts:
     rubki regular 12
@@ -23,3 +24,9 @@ Exec = Exec=env GDK_BACKEND=x11 /usr/bin/vmware %U
 #configure hyprland plugins 
 hyprexpo
 huprsunset
+
+for minimal arch
+1) setup wifi using usb tethering from phone
+then download packages :
+sudo pacman iwd wpa_supplicant wireless_tools dialog dhcpcd
+

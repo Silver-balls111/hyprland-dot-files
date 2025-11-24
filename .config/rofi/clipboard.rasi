@@ -6,6 +6,8 @@ configuration {
     show-icons:                 true;
   	drun-display-format:        "{name}";
     hover-select:               true;
+    me-select-entry:            "";
+    me-accept-entry:            "MousePrimary";
 }
 
 /* config and colors ---- */

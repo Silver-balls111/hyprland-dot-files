@@ -12,6 +12,8 @@ configuration {
     font:                        "JetBrainsMono Nerd Font 10";
     icon-theme:                  "AdwaitaLegacy";
     hover-select:                true;
+    me-select-entry:             "";
+    me-accept-entry:             "MousePrimary";
 }
 
 //@theme "~/.config/rofi/theme.rasi"
